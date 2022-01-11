@@ -6,7 +6,10 @@ namespace GameOfLife.Engine
 {
     public class GameEngine
     {
-
+        public string[,]? GameGrid { get; set; }
+        const string EMPTYCELL = "[ ]";
+        const string LIVECELL = "[O]";
+        const string DEADCELL = "[X]";
         public GameProperties? GameProperties { get; set; }
 
         public GridSizeProperties ReadGridSize()
@@ -22,9 +25,32 @@ namespace GameOfLife.Engine
 
             return new GridSizeProperties(numberX, numberY);
         }
+
+        public string[,]? GenerateGameArray(GridSizeProperties? gridSizeProperties)
+        {
+            if (gridSizeProperties == null)
+            {
+                return null;
+            }
+
+            var emptyGrid = new string[gridSizeProperties.GridXSize, gridSizeProperties.GridYSize];
+            return emptyGrid;
+        }
+        void FillGameGrid()
+        {
+            for (int i = 0; i < GameGrid?.GetLength(0); i++)
+            {
+                for (int j = 0; j < GameGrid?.GetLength(1); j++)
+                {
+                    GameGrid[i, j] = EMPTYCELL;
+                }
+            }
+        }
         public GameEngine()
         {
             GameProperties = new(new(ReadGridSize()));
+            GameGrid = GenerateGameArray(GameProperties.GridSizeProperties);
+            FillGameGrid();
         }
     }
 }
