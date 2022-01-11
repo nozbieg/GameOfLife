@@ -7,7 +7,6 @@ namespace GameOfLife.Engine
     public class GameEngine
     {
         public string[,]? GameGrid { get; set; }
-        const string EMPTYCELL = "[ ]";
         const string LIVECELL = "[O]";
         const string DEADCELL = "[X]";
         public GameProperties? GameProperties { get; set; }
@@ -42,7 +41,7 @@ namespace GameOfLife.Engine
             {
                 for (int j = 0; j < GameGrid?.GetLength(1); j++)
                 {
-                    GameGrid[i, j] = EMPTYCELL;
+                    GameGrid[i, j] = DEADCELL;
                 }
             }
         }
